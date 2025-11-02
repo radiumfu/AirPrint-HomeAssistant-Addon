@@ -1,5 +1,5 @@
 name: CUPS AirPrint Bridge
-version: 0.2.0
+version: 0.0.1
 slug: cups_airprint
 description: Share non‑AirPrint printers to iOS/macOS via CUPS + Avahi (AirPrint)
 url: https://github.com/radium-fu/homeassistant-addon-cups-airprint
