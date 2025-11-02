@@ -1,0 +1,4 @@
+# cups-airprint/rootfs/etc/services.d/cups/run
+#!/usr/bin/with-contenv sh
+# Start CUPS
+exec cupsd -f

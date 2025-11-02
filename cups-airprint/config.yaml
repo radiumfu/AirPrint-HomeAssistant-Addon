@@ -1,0 +1,69 @@
+name: CUPS AirPrint Bridge
+version: 0.2.0
+slug: cups_airprint
+description: Share non‑AirPrint printers to iOS/macOS via CUPS + Avahi (AirPrint)
+url: https://github.com/radium-fu/homeassistant-addon-cups-airprint
+ingress: true
+ingress_port: 631
+panel_icon: mdi:printer
+panel_title: CUPS AirPrint
+startup: services
+init: false
+arch:
+- aarch64
+- amd64
+- armv7
+# AirPrint needs mDNS on the LAN; host_network is required so Avahi can send multicast.
+host_network: true
+
+
+# Optional: keep 631 exposed if you also want to reach CUPS from LAN directly
+# Comment this block if you want *ingress-only* access.
+ports:
+"631/tcp": 631 # CUPS admin UI (optional when using ingress)
+
+
+map:
+- data:rw # Persist CUPS config & queues under /data
+
+
+# Allow uploading vendor PPDs into /data/ppd
+# (Create this path and drop .ppd/.drv files there; GUI will list them.)
+startup_script: null
+
+
+environment:
+LANG: en_US.UTF-8
+
+
+options:
+admin_user: print
+admin_password: print
+avahi_reflector: false # If true, reflect mDNS across subnets (use with caution)
+share_printers: true
+allow_remote_admin: true
+
+
+schema:
+admin_user: str
+admin_password: password
+avahi_reflector: bool
+share_printers: bool
+allow_remote_admin: bool
+
+
+# Allow the add-on to manage network daemons inside the container
+apparmor: false
+privileged:
+- NET_ADMIN
+- SYS_ADMIN
+
+
+timeout: 30
+
+
+description_long: |
+This add‑on bundles a CUPS print server with Avahi to advertise your
+shared CUPS printers as native AirPrint targets on your network.
+It incorporates concepts from `chuckcharlie/cups-avahi-airprint` and
+the structure of the `cups-addon` for Home Assistant.

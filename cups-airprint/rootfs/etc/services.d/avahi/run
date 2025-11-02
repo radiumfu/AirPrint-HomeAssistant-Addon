@@ -1,0 +1,4 @@
+# cups-airprint/rootfs/etc/services.d/avahi/run
+#!/usr/bin/with-contenv sh
+# Start Avahi for mDNS / AirPrint advertisements
+exec avahi-daemon --no-chroot --debug

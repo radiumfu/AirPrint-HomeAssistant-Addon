@@ -1,0 +1,6 @@
+{
+"name": "Radium's Add-ons",
+"url": "https://example.com/radium-addons",
+"maintainer": "Radium Fu <radium@example.com>",
+"arch": ["aarch64", "amd64", "armv7"]
+}
